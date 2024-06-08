@@ -13,7 +13,7 @@ namespace MVC_Deel1.Services
         {
             _users = new List<User>
             {
-                new User {Id= 0, UserName= "QA", BtwNummer= "BE12343", BuildingId= 1},
+               
                 new User {Id= 1, UserName= "QA", BtwNummer= "BE12343", BuildingId= 1},
                 new User {Id= 2, UserName= "BI",BtwNummer= "BE15643", BuildingId= 2 },
                 new User {Id= 3, UserName= "MI",BtwNummer= "BE12876", BuildingId= 3},

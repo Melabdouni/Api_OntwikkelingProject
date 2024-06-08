@@ -45,7 +45,7 @@ namespace MVC_Deel1.Controllers
                 return NotFound();
             }
 
-            var userWithUtility = _utilities.Where(u => u.Id == utilityId); ;
+            var userWithUtility = _utilityData.GetAll().Where(u => u.Id == utilityId); ;
             if (!userWithUtility.Any())
             {
                 return NotFound();
@@ -60,31 +60,37 @@ namespace MVC_Deel1.Controllers
             return Ok(userWithUtility);
         }
 
-        /*[HttpPost("PostNewUserWithUtility")]
+        [HttpPost("PostNewUserWithUtility")]
         public IActionResult Create([FromBody] UtilityCreateViewModel utilityCreateViewModel)
         {
             if (utilityCreateViewModel == null)
             {
-                return BadRequest("Invalid utility data");
+                return BadRequest("Inval data");
             }
 
-            var user = _userData.Get(utilityCreateViewModel.UserId);
-            if (user == null)
+            var existingUser = _userData.GetAll().FirstOrDefault(u => u.Id == utilityCreateViewModel.UserId);
+            if (existingUser != null)
             {
-                return BadRequest("User not found");
+                return BadRequest("User already exist");
             }
+            var newUser = new User
+            {
+                Id = utilityCreateViewModel.UserId,
+                UserName = utilityCreateViewModel.UserName,
+            };
+            _userData.Add(newUser);
 
             var newUtility = new Utility
             {
-                User = user,
+                User = newUser,
                 UserId = utilityCreateViewModel.UserId,
                 Type = utilityCreateViewModel.Type,
-                
+
             };
 
             _utilityData.Add(newUtility);
             return CreatedAtAction(nameof(Details), new { id = newUtility.Id }, newUtility);
-        }*/
+        }
 
 
 

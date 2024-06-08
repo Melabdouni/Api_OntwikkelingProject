@@ -10,7 +10,7 @@ namespace MVC_Deel1.ViewModels
         public string Type { get; set; }
         public int UserId { get; set; }
         public string UserName { get; set; }
-        public User user { get; set; }
+       /* public User user { get; set; }*/
        /* public int BuildingId { get; set; }*/
     }
 }
