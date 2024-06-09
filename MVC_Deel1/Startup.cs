@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 
 
 using Newtonsoft.Json;
+using MVC_Deel1.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVC_Deel1
 {
@@ -25,10 +27,13 @@ namespace MVC_Deel1
         });
 
             services.AddControllers();
-            services.AddScoped<IBuildingData,InMemoryBuildingData>();
+            services.AddScoped<IBuildingData, InMemoryBuildingData>();
             services.AddScoped<IUserData, InMemoryUserData>();
             services.AddScoped<IUtilityData, InMemoryUtilityData>();
             services.AddSwaggerGen();
+            var connection = "server=localhost; database=vastgoedBeheer-db; user=root; password= root";
+            services.AddDbContext<MVCDbContext>(
+                x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
         }
 

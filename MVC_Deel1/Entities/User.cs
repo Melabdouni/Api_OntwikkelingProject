@@ -10,9 +10,10 @@ namespace MVC_Deel1.Entities
         public string BtwNummer { get; set; }
 
         public int BuildingId { get; set; }
-        public Building Building {  get; set; }
-        public int UtilityId { get; set; }
-        public Utility Utility { get; set; }
+        public Building Building { get; set; }
+        /*public int UtilityId { get; set; }*/
+        /*public Utility Utility { get; set; }*/
         public ICollection<Utility> Utilities { get; set; } = new List<Utility>();
+        public ICollection<UserUtility> UserUtility { get; set; }
     };
 }

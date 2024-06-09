@@ -20,8 +20,8 @@ namespace MVC_Deel1.Entities
         public string Adress { get; set; }
         public BuildingType BuildingType { get; set; }
 
-        /* deze heb ik aangevuld*/
-        public User User { get; set; }
+        /* deze heb ik aangevuld*//*
+        public User User { get; set; }*/
         public ICollection<User> Users { get; set; }= new List<User>();
 
         public ICollection<Utility> Utilities { get; set; }

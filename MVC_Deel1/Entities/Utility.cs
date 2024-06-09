@@ -9,7 +9,7 @@ namespace MVC_Deel1.Entities
         public int UserId { get; set; }
 
         public User User { get; set; }
-        public ICollection<User> Utilities { get; set; } = new List<User>();
+        public ICollection<UserUtility> UserUtility { get; set; } 
 
     }
 }

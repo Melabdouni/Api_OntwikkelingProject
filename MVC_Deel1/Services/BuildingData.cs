@@ -1,9 +1,59 @@
-﻿using MVC_Deel1.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Deel1.Entities;
 using MVC_Deel1.Services;
 
 namespace MVC_Deel1.Services
 {
-   
+ 
+        public class SqlBuildingData : IBuildingData
+    {
+        private static List<Building> _buildings;
+        private IUserData _userData;
+        
+
+        private MVCDbContext _context;
+        
+        public SqlBuildingData (MVCDbContext context)
+        {
+            _context = context;
+        }
+        public IEnumerable<Building> GetAll()
+        {
+            return _context.Buildings;
+        }
+        public Building Get(int id)
+        {
+            return _context.Buildings.FirstOrDefault(x => x.Id == id);
+        }
+        public void Add(Building building)
+        {
+            building.Id = _context.Buildings.Max(x => x.Id) + 1;
+            _context.Buildings.Add(building);
+        }
+        public void Delete(Building building)
+        {
+            _context.Buildings.Remove(building);
+        }
+        public void Update(Building building)
+        {
+            var oldBuilding = Get(building.Id);
+            oldBuilding.Name = building.Name;
+            oldBuilding.BuildingType = building.BuildingType;
+        }
+        public IEnumerable<User> GetUsersByBuilding(int buildingId)
+        {
+            var building = (buildingId);
+            if (building == null)
+                return Enumerable.Empty<User>();
+
+            var users = new List<User>();
+
+            return _userData.GetAll().Where(u => u.BuildingId == buildingId);
+        }
+    }
+
+
+
     public class InMemoryBuildingData : IBuildingData
     {
         private static List<Building> _buildings;
@@ -23,8 +73,6 @@ namespace MVC_Deel1.Services
             new Building { Id = 9,Name = "Sluismeesterwoning", Adress = "Letlandstraat 34", BuildingType= BuildingType.Werkplaats }
             };
         }
-      
-
         public IEnumerable<Building> GetAll()
         {
            return _buildings;
