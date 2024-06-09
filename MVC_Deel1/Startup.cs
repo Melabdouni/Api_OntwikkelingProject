@@ -31,7 +31,7 @@ namespace MVC_Deel1
             services.AddScoped<IUserData, InMemoryUserData>();
             services.AddScoped<IUtilityData, InMemoryUtilityData>();
             services.AddSwaggerGen();
-            var connection = "server=localhost; database=vastgoedBeheer-db; user=root; password= root";
+            var connection = "server=localhost; database=vastgoedNuts-db; user=root; password= root";
             services.AddDbContext<MVCDbContext>(
                 x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
